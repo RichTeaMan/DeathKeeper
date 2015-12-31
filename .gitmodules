@@ -1,0 +1,3 @@
+[submodule "CommandLineParser"]
+	path = CommandLineParser
+	url = https://github.com/RichTeaMan/CommandLineParser.git

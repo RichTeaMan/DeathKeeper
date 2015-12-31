@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +52,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CommandLineParser\CommandLineParser\CommandLineParser.csproj">
+      <Project>{5ad8c2d9-57cc-43b3-9260-3da905b4ade8}</Project>
+      <Name>CommandLineParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeathKeeper.Wdq\DeathKeeper.Wdq.csproj">
+      <Project>{1f7b617f-1ef9-47bc-99d8-832a6eec2e84}</Project>
+      <Name>DeathKeeper.Wdq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeathKeeper.WikiData.Human\DeathKeeper.WikiData.Human.csproj">
+      <Project>{91b9b6f3-26d5-4c23-a5a5-9cc969e8e43c}</Project>
+      <Name>DeathKeeper.WikiData.Human</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeathKeeper.WikiDataRequestor\DeathKeeper.WikiData.csproj">
+      <Project>{56968db0-7ec6-4b48-a7f0-9cd5a53627bf}</Project>
+      <Name>DeathKeeper.WikiData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
