@@ -8,15 +8,17 @@ namespace DeathKeeper.WikiData.Human
 {
     public class Human
     {
+        public string Label { get; private set; }
         public string BirthName { get; private set; }
         public string[] CountryOfCitizenshipIds { get; private set; }
         public string[] OccupationIds { get; private set; }
-        public DateTime DateOfBirth { get; private set; }
-        public DateTime? DateOfDeath { get; private set; }
+        public NodaTime.Instant? DateOfBirth { get; private set; }
+        public NodaTime.Instant? DateOfDeath { get; private set; }
         public string WikiLink { get; private set; }
 
-        public Human(string birthName, string[] countryOfCitizenshipIds, string[] occupationIds, DateTime dateOfBirth, DateTime? dateOfDeath, string wikiLink)
+        public Human(string label, string birthName, string[] countryOfCitizenshipIds, string[] occupationIds, NodaTime.Instant? dateOfBirth, NodaTime.Instant? dateOfDeath, string wikiLink)
         {
+            Label = label;
             BirthName = birthName;
             CountryOfCitizenshipIds = countryOfCitizenshipIds;
             OccupationIds = occupationIds;
@@ -28,6 +30,9 @@ namespace DeathKeeper.WikiData.Human
         public override string ToString()
         {
             var sb = new StringBuilder();
+            sb.AppendFormat("{0}: {1}", nameof(Label), Label);
+            sb.AppendLine();
+
             sb.AppendFormat("{0}: {1}", nameof(BirthName), BirthName);
             sb.AppendLine();
 
