@@ -1,7 +1,9 @@
 ﻿using CommandLineParser;
+using DeathKeeper.Wdq;
 using DeathKeeper.WikiData.Human;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,8 @@ namespace DeathKeeper
 {
     class Program
     {
+        const string WdqResponse = "WdqResponse.json";
+
         static void Main(string[] args)
         {
             MethodInvoker command = null;
@@ -68,7 +72,25 @@ namespace DeathKeeper
                     Console.WriteLine("{0} is not an integer.", id);
                 }
             }
-            Console.ReadKey();
+        }
+
+        [ClCommand("GetAllPersons")]
+        public static void GetAllPersons()
+        {
+            var responseBody = File.ReadAllText(WdqResponse);
+            var wdqRequestor = new WdqRequestor();
+            
+            Console.WriteLine("Getting human instance references.");
+            var wdqResult = wdqRequestor.ResultFromString(responseBody);
+            Console.WriteLine("Found {0} human instances.", wdqResult.items.Length);
+
+            var humanFactory = new HumanFactory();
+            foreach (var id in wdqResult.items)
+            {
+                var human = humanFactory.FromEntityId(id);
+                Console.WriteLine("{0}:", id);
+                Console.WriteLine("{0}", human);
+            }
         }
     }
 }
