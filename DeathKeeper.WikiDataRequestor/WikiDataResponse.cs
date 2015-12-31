@@ -99,6 +99,17 @@ namespace DeathKeeper.WikiData
             }
             return dictionary;
         }
+
+        public string GetDictValue(string key)
+        {
+            var dict = ValuesAsDictionary();
+            string result = null;
+            if (dict != null)
+            {
+                dict.TryGetValue(key, out result);
+            }
+            return result;
+        }
     }
 
     public class Reference

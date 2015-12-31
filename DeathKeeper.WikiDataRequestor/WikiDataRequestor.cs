@@ -10,14 +10,11 @@ namespace DeathKeeper.WikiData
 {
     public class WikiDataRequestor
     {
-        private readonly string url = "http://wdq.wmflabs.org/api?q=claim[31:(tree[{0}][][279])]";
+        private readonly string url = "https://www.wikidata.org/wiki/Special:EntityData/Q{0}.json";
 
-        public WikiDataResponse GetInstancesOf(int subclassId)
+        public WikiDataResponse GetEntity(int entityId)
         {
-            // claim[31:(tree[12280][][279])] gives a list of all instances (P31)of subclasses(P279) of bridges Q12280.
-            // see https://wdq.wmflabs.org/api_documentation.html
-
-            var instanceUrl = string.Format(url, subclassId);
+            var instanceUrl = string.Format(url, entityId);
 
             using (var webclient = new WebClient())
             {
