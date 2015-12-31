@@ -28,11 +28,11 @@ namespace DeathKeeper.WikiData.Human
 
         private IEnumerable<string> GetClaimValues(Entity entity, string claim, string valueKey)
         {
-            IEnumerable<string> result = null;
-            var claims = entity.claims[claim];
-            if (claims != null)
+            IEnumerable<string> result = new string[] { };
+            Claim[] claims;
+            if (entity.claims.TryGetValue(claim, out claims))
             {
-                result = claims.Select(c => c.mainsnak.datavalue.GetDictValue(valueKey));
+                result = claims.Select(c => c.mainsnak?.datavalue?.GetDictValue(valueKey)).Where(c => c != null);
             }
             return result;
         }
@@ -41,11 +41,27 @@ namespace DeathKeeper.WikiData.Human
         {
             var entity = wikiDataResponse.entities.First().Value;
 
+            Language label;
+            if (entity.labels.TryGetValue("en", out label))
+            {
+                label = entity.labels.First().Value;
+            }
+            string labelValue = label.value;
             string birthName = GetClaimValue(entity, WikiDataProperties.BirthName, "text");
             string[] countryOfCitizenship = GetClaimValues(entity, WikiDataProperties.CountryOfCitizenship, "numeric-id").ToArray();
             string[] occupation = GetClaimValues(entity, WikiDataProperties.Occupation, "numeric-id").ToArray();
-            DateTime dateOfBirth = GetClaimValue(entity, WikiDataProperties.DateOfBirth, "time").AsDateTime();
-            DateTime dateOfDeath = GetClaimValue(entity, WikiDataProperties.DateOfDeath, "time").AsDateTime();
+            NodaTime.Instant? dateOfBirth = null;
+            var dateOfBirthStr = GetClaimValue(entity, WikiDataProperties.DateOfBirth, "time");
+            if (dateOfBirthStr != null)
+            {
+                dateOfBirth = dateOfBirthStr.AsDateTime();
+            }
+            NodaTime.Instant? dateOfDeath = null;
+            var dateOfDeathStr = GetClaimValue(entity, WikiDataProperties.DateOfDeath, "time");
+            if (dateOfDeathStr != null)
+            {
+                dateOfDeath = dateOfDeathStr.AsDateTime();
+            }
 
             string url = null;
             SiteLink enSiteLink = null;
@@ -54,7 +70,7 @@ namespace DeathKeeper.WikiData.Human
                 url = enSiteLink.url;
             }
 
-            var human = new Human(birthName, countryOfCitizenship, occupation, dateOfBirth, dateOfDeath, url);
+            var human = new Human(labelValue, birthName, countryOfCitizenship, occupation, dateOfBirth, dateOfDeath, url);
             return human;
     }
 
