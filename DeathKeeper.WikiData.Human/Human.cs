@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NodaTime.Text;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,28 @@ namespace DeathKeeper.WikiData.Human
             DateOfBirth = dateOfBirth;
             DateOfDeath = dateOfDeath;
             WikiLink = wikiLink;
+        }
+
+        public int Age()
+        {
+            if (!DateOfBirth.HasValue)
+            {
+                return -1;
+            }
+            else
+            {
+                DateTime end;
+                if (DateOfDeath.HasValue)
+                {
+                    end = DateOfDeath.Value.ToDateTimeUtc();
+                        }
+                else {
+                    end = DateTime.Now;
+                    
+                }
+                var age = end - DateOfBirth.Value.ToDateTimeUtc();
+                return (int)(age.TotalDays / 365.0);
+            }
         }
 
         public override string ToString()
