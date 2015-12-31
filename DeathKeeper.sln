@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeathKeeper.WikiData.Human.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cache", "Cache\Cache.csproj", "{E1FF9A32-7325-4D9B-BBCF-D0A9895A45E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLineParser", "..\CommandLineParser\CommandLineParser\CommandLineParser.csproj", "{5AD8C2D9-57CC-43B3-9260-3DA905B4ADE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLineParser", "CommandLineParser\CommandLineParser\CommandLineParser.csproj", "{5AD8C2D9-57CC-43B3-9260-3DA905B4ADE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

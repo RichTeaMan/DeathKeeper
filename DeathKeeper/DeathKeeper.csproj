@@ -62,7 +62,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CommandLineParser\CommandLineParser\CommandLineParser.csproj">
+    <ProjectReference Include="..\CommandLineParser\CommandLineParser\CommandLineParser.csproj">
       <Project>{5ad8c2d9-57cc-43b3-9260-3da905b4ade8}</Project>
       <Name>CommandLineParser</Name>
     </ProjectReference>
