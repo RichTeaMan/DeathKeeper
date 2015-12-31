@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NodaTime.Text;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,12 @@ namespace DeathKeeper.WikiData
 {
     public static class Extensions
     {
-        public static DateTime AsDateTime(this string dateTimeStr)
+        public static NodaTime.Instant? AsDateTime(this string dateTimeStr)
         {
-            var dateTime = DateTime.Parse(dateTimeStr.Replace("+", ""));
-            return dateTime;
+            if (dateTimeStr == null)
+                return null;
+            var result = InstantPattern.ExtendedIsoPattern.Parse(dateTimeStr.Replace("-00", "-01").Replace("+", ""));
+            return result.Value;
         }
     }
 }
