@@ -77,6 +77,8 @@ namespace DeathKeeper
         [ClCommand("GetAllPersons")]
         public static void GetAllPersons()
         {
+            var humans = new List<Human>();
+            var errors = new List<Tuple<int, Exception>>();
             var responseBody = File.ReadAllText(WdqResponse);
             var wdqRequestor = new WdqRequestor();
             
@@ -87,10 +89,34 @@ namespace DeathKeeper
             var humanFactory = new HumanFactory();
             foreach (var id in wdqResult.items)
             {
-                var human = humanFactory.FromEntityId(id);
-                Console.WriteLine("{0}:", id);
-                Console.WriteLine("{0}", human);
+                try
+                {
+                    var human = humanFactory.FromEntityId(id);
+                    Console.WriteLine("{0}:", id);
+                    Console.WriteLine("{0}", human);
+                    humans.Add(human);
+                }
+                catch(Exception ex)
+                {
+                    var t = new Tuple<int, Exception>(id, ex);
+                    errors.Add(t);
+                }
             }
+
+            Console.WriteLine("{0} humans found.", humans.Count);
+            Console.WriteLine("Writing reports.");
+
+            var livingSb = new StringBuilder();
+            livingSb.AppendFormat("Name\tDoB\tAge\tLink");
+            livingSb.AppendLine();
+            var living = humans.Where(h => h.DateOfBirth != null && h.DateOfDeath == null).OrderByDescending(h => h.Age());
+            foreach(var l in living)
+            {
+                livingSb.AppendFormat("{0}\t{1}\t{2}\t{3}", l.Label, l.DateOfBirth, l.Age(), l.WikiLink);
+                livingSb.AppendLine();
+            }
+            File.WriteAllText("Living.txt", livingSb.ToString());
+            Console.WriteLine("Reports finished.");
         }
     }
 }
