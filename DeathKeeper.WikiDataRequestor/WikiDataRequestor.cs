@@ -31,7 +31,17 @@ namespace DeathKeeper.WikiData
 
         public WikiDataResponse ResultFromString(string body)
         {
-            var result = JsonConvert.DeserializeObject<WikiDataResponse>(body);
+            var result = JsonConvert.DeserializeObject<WikiDataResponse>(body, new JsonSerializerSettings
+            {
+                Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+                {
+                    var member = args.ErrorContext.Member as string;
+                    if (member == "aliases" || member == "descriptions")
+                    {
+                        args.ErrorContext.Handled = true;
+                    }
+                }
+            });
             return result;
         }
     }
