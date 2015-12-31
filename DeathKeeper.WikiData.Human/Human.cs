@@ -24,5 +24,39 @@ namespace DeathKeeper.WikiData.Human
             DateOfDeath = dateOfDeath;
             WikiLink = wikiLink;
         }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.AppendFormat("{0}: {1}", nameof(BirthName), BirthName);
+            sb.AppendLine();
+
+            sb.AppendFormat("{0}:", nameof(CountryOfCitizenshipIds));
+            sb.AppendLine();
+            foreach(var countryOfCitizenshipId in CountryOfCitizenshipIds)
+            {
+                sb.AppendFormat("\t{0}", countryOfCitizenshipId);
+                sb.AppendLine();
+            }
+
+            sb.AppendFormat("{0}:", nameof(OccupationIds));
+            sb.AppendLine();
+            foreach (var occupationId in OccupationIds)
+            {
+                sb.AppendFormat("\t{0}", occupationId);
+                sb.AppendLine();
+            }
+
+            sb.AppendFormat("{0}: {1}", nameof(DateOfBirth), DateOfBirth);
+            sb.AppendLine();
+
+            sb.AppendFormat("{0}: {1}", nameof(DateOfDeath), DateOfDeath);
+            sb.AppendLine();
+
+            sb.AppendFormat("{0}: {1}", nameof(WikiLink), WikiLink);
+            sb.AppendLine();
+
+            return sb.ToString();
+        }
     }
 }
