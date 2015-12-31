@@ -29,17 +29,18 @@ namespace DeathKeeper.WikiData.Tests
             var human = humanFactory.FromWikiDataResponse(wikiDataResponse);
 
             // assert
+            Assert.AreEqual("Douglas Adams", human.Label);
             Assert.AreEqual("Douglas Noël Adams", human.BirthName);
 
-            var dobTime = human.DateOfBirth;
-            Assert.AreEqual(1952, dobTime.Year);
-            Assert.AreEqual(3, dobTime.Month);
-            Assert.AreEqual(11, dobTime.Day);
+            var dobTime = human.DateOfBirth.Value;
+            Assert.AreEqual(1952, dobTime.ToDateTimeUtc().Year);
+            Assert.AreEqual(3, dobTime.ToDateTimeUtc().Month);
+            Assert.AreEqual(11, dobTime.ToDateTimeUtc().Day);
 
             var dodTime = human.DateOfDeath.Value;
-            Assert.AreEqual(2001, dodTime.Year);
-            Assert.AreEqual(5, dodTime.Month);
-            Assert.AreEqual(11, dodTime.Day);
+            Assert.AreEqual(2001, dodTime.ToDateTimeUtc().Year);
+            Assert.AreEqual(5, dodTime.ToDateTimeUtc().Month);
+            Assert.AreEqual(11, dodTime.ToDateTimeUtc().Day);
 
             var expectedOccupation = new int[] {28389,
                 6625963,

@@ -1,0 +1,260 @@
+{
+  "entities": {
+    "Q7995": {
+      "pageid": 21272845,
+      "ns": 0,
+      "title": "Q7995",
+      "lastrevid": 264656606,
+      "modified": "2015-10-30T07:09:33Z",
+      "type": "item",
+      "id": "Q7995",
+      "labels": {
+        "de": {
+          "language": "de",
+          "value": "Conrad Nutschan"
+        },
+        "en": {
+          "language": "en",
+          "value": "Conrad Nutschan"
+        },
+        "fr": {
+          "language": "fr",
+          "value": "Conrad Nutschan"
+        }
+      },
+      "descriptions": [ ],
+      "aliases": [ ],
+      "claims": {
+        "P569": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P569",
+              "datavalue": {
+                "value": {
+                  "time": "+1979-09-05T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q7995$4749cac4-4cbd-c4e0-1053-ebd451950ce7",
+            "rank": "normal"
+          }
+        ],
+        "P373": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P373",
+              "datavalue": {
+                "value": "Conrad Nutschan",
+                "type": "string"
+              },
+              "datatype": "string"
+            },
+            "type": "statement",
+            "id": "Q7995$a291b6d4-4b3d-9c1a-60a4-896a22221c6a",
+            "rank": "normal"
+          }
+        ],
+        "P21": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P21",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6581097
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q7995$076e786f-41bb-ba58-2971-e7d213a2fb63",
+            "rank": "normal"
+          }
+        ],
+        "P27": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P27",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 183
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q7995$45e2ea3d-4676-0c23-e57f-59e850d38566",
+            "rank": "normal"
+          }
+        ],
+        "P69": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P69",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 1622222
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P805": [
+                {
+                  "snaktype": "value",
+                  "property": "P805",
+                  "hash": "0df54fa904365011a8696e9e883d9f94bb7eb5ee",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 1802402
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [ "P805" ],
+            "id": "Q7995$fe9d6d5c-46b9-cfae-ee5c-ccaaae9fbaa0",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P69",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 158158
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P805": [
+                {
+                  "snaktype": "value",
+                  "property": "P805",
+                  "hash": "44a061c76134088b055ef444bba5cbb5d076042c",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 21198
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [ "P805" ],
+            "id": "Q7995$835622e6-406f-4b4e-b16e-65fba4aa591a",
+            "rank": "normal"
+          }
+        ],
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 5
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q7995$ff0528bb-4e88-c57e-901b-83ef32578fae",
+            "rank": "normal"
+          }
+        ],
+        "P735": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P735",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 17436400
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q7995$d5b01b95-4d2d-7cf6-2fb3-934bd959e2c3",
+            "rank": "normal"
+          }
+        ],
+        "P553": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P553",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 52
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P554": [
+                {
+                  "snaktype": "value",
+                  "property": "P554",
+                  "hash": "4f5750aad391828e9cec7a28484185b556f29168",
+                  "datavalue": {
+                    "value": "Conny",
+                    "type": "string"
+                  },
+                  "datatype": "string"
+                }
+              ]
+            },
+            "qualifiers-order": [ "P554" ],
+            "id": "Q7995$b66fe362-4b24-a336-1641-82d57ba562e4",
+            "rank": "normal"
+          }
+        ]
+      },
+      "sitelinks": {
+        "commonswiki": {
+          "site": "commonswiki",
+          "title": "Category:Conrad Nutschan",
+          "badges": [ ],
+          "url": "https://commons.wikimedia.org/wiki/Category:Conrad_Nutschan"
+        }
+      }
+    }
+  }
+}
