@@ -29,44 +29,6 @@ namespace DeathKeeper.WikiData
         public Dictionary<string, Claim[]> claims { get; set; }
         public Dictionary<string, SiteLink> sitelinks { get; set; }
     }
-    //"P1368": [
-    //  {
-    //    "mainsnak": {
-    //      "snaktype": "value",
-    //      "property": "P1368",
-    //      "datavalue": {
-    //        "value": "000057405",
-    //        "type": "string"
-    //      },
-    //      "datatype": "string"
-    //    },
-    //    "type": "statement",
-    //    "id": "Q42$11725e9f-4f81-e0fd-b00a-b885fe7a75ac",
-    //    "rank": "normal",
-    //    "references": [
-    //      {
-    //        "hash": "a51d6594fee36c7452eaed2db35a4833613a7078",
-    //        "snaks": {
-    //          "P143": [
-    //            {
-    //              "snaktype": "value",
-    //              "property": "P143",
-    //              "datavalue": {
-    //                "value": {
-    //                  "entity-type": "item",
-    //                  "numeric-id": 54919
-    //                },
-    //                "type": "wikibase-entityid"
-    //              },
-    //              "datatype": "wikibase-item"
-    //            }
-    //          ]
-    //        },
-    //        "snaks-order": [ "P143" ]
-    //      }
-    //    ]
-    //  }
-    //],
 
     public class Claim
     {
