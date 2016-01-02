@@ -92,9 +92,11 @@ namespace DeathKeeper
                 try
                 {
                     var human = humanFactory.FromEntityId(id);
-                    Console.WriteLine("{0}:", id);
-                    Console.WriteLine("{0}", human);
                     humans.Add(human);
+                    if (humans.Count % 100 == 0)
+                    {
+                        Console.Write("\r{0}/{1} completed.", humans.Count, wdqResult.items.Count());
+                    }
                 }
                 catch(Exception ex)
                 {
@@ -102,7 +104,7 @@ namespace DeathKeeper
                     errors.Add(t);
                 }
             }
-
+            Console.WriteLine();
             Console.WriteLine("{0} humans found.", humans.Count);
             Console.WriteLine("Writing reports.");
 
