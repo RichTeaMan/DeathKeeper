@@ -21,8 +21,12 @@ namespace Cache
 
         public string GetPage(string url)
         {
-            var page = GetPageAsync(url).Result;
-            return page;
+            using (var task = Task.Run(async () => await GetPageAsync(url)))
+            {
+                task.Wait();
+                var page = task.Result;
+                return page;
+            }
         }
 
         public async Task<string> GetPageAsync(string url)
