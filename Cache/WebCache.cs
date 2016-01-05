@@ -19,6 +19,26 @@ namespace Cache
             CacheFolder = cacheFolder;
         }
 
+        public void FillCache(string url)
+        {
+            using (var task = Task.Run(async () => await FillCacheAsync(url)))
+            {
+                task.Wait();
+            }
+        }
+
+        public async Task FillCacheAsync(string url)
+        {
+            if (!Directory.Exists(CacheFolder))
+                Directory.CreateDirectory(CacheFolder);
+            string cacheFilePath = GetCacheFilePath(url);
+
+            if (!File.Exists(cacheFilePath))
+            {
+                await DownloadAndSave(url, cacheFilePath);
+            }
+        }
+
         public string GetPage(string url)
         {
             using (var task = Task.Run(async () => await GetPageAsync(url)))
@@ -33,31 +53,41 @@ namespace Cache
         {
             if (!Directory.Exists(CacheFolder))
                 Directory.CreateDirectory(CacheFolder);
-
-            string cacheFileName = string.Format("{0}\\{1}", CacheFolder, url.Replace(":", "COlON").Replace("\"", "QUOT").Replace("/", "FSLASH").Replace("\\", "BSLASH").Replace("#", "HASH"));
+            string cacheFilePath = GetCacheFilePath(url);
 
             string contents;
-            if (File.Exists(cacheFileName))
+            if (File.Exists(cacheFilePath))
             {
-                using (var reader = File.OpenText(cacheFileName))
+                using (var reader = File.OpenText(cacheFilePath))
                 {
                     contents = await reader.ReadToEndAsync();
                 }
             }
             else
             {
-                using (var client = new WebClient())
-                {
-                    client.Headers.Add("User-Agent", UserAgent);
-                    var uri= new Uri(url, UriKind.Absolute);
-                    contents = await client.DownloadStringTaskAsync(uri);
-                }
-
-                File.WriteAllText(cacheFileName.ToLowerInvariant(), contents);
+                contents = await DownloadAndSave(url, cacheFilePath);
             }
             return contents;
         }
-       
+
+        private async Task<string> DownloadAndSave(string url, string cacheFilePath)
+        {
+            using (var client = new WebClient())
+            {
+                client.Headers.Add("User-Agent", UserAgent);
+                var uri = new Uri(url, UriKind.Absolute);
+                string contents = await client.DownloadStringTaskAsync(uri);
+                File.WriteAllText(cacheFilePath.ToLowerInvariant(), contents);
+                return contents;
+            }
+        }
+
+        private string GetCacheFilePath(string url)
+        {
+            var name = url.Replace(":", "COlON").Replace("\"", "QUOT").Replace("/", "FSLASH").Replace("\\", "BSLASH").Replace("#", "HASH");
+            var path = Path.Combine(CacheFolder, name);
+            return path;
+        }
 
     }
 }
