@@ -17,12 +17,24 @@ namespace DeathKeeper.WikiData
 
         public WikiDataRequestor()
         {
-            cache = new WebCache(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DeathKeeperCache"));
+            cache = new WebCache(GetCacheFolder());
+        }
+
+        public string GetCacheFolder()
+        {
+            var cacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DeathKeeperCache");
+            return cacheFolder;
+        }
+
+        public string GetEntityUrl(int entityId)
+        {
+            var instanceUrl = string.Format(url, entityId);
+            return instanceUrl;
         }
 
         public WikiDataResponse GetEntity(int entityId)
         {
-            var instanceUrl = string.Format(url, entityId);
+            var instanceUrl = GetEntityUrl(entityId);
 
             var body = cache.GetPage(instanceUrl);
             var result = ResultFromString(body);
