@@ -62,6 +62,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Cache\Cache.csproj">
+      <Project>{e1ff9a32-7325-4d9b-bbcf-d0a9895a45e0}</Project>
+      <Name>Cache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CommandLineParser\CommandLineParser\CommandLineParser.csproj">
       <Project>{5ad8c2d9-57cc-43b3-9260-3da905b4ade8}</Project>
       <Name>CommandLineParser</Name>

@@ -1,11 +1,15 @@
-﻿using CommandLineParser;
+﻿using Cache;
+using CommandLineParser;
 using DeathKeeper.Wdq;
+using DeathKeeper.WikiData;
 using DeathKeeper.WikiData.Human;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DeathKeeper
@@ -72,6 +76,48 @@ namespace DeathKeeper
                     Console.WriteLine("{0} is not an integer.", id);
                 }
             }
+        }
+
+
+        [ClCommand("FillCache")]
+        public static void FillCache()
+        {
+            var errors = new ConcurrentBag<Tuple<int, Exception>>();
+            var responseBody = File.ReadAllText(WdqResponse);
+            var wdqRequestor = new WdqRequestor();
+
+            Console.WriteLine("Getting human instance references.");
+            var wdqResult = wdqRequestor.ResultFromString(responseBody);
+            Console.WriteLine("Found {0} human instances.", wdqResult.items.Length);
+
+            var wikiDataRequestor = new WikiDataRequestor();
+            var cache = new WebCache(wikiDataRequestor.GetCacheFolder());
+            int count = 0;
+
+            var partitions = new List<IEnumerable<int>>();
+
+            
+            Parallel.ForEach(wdqResult.items, new ParallelOptions() { MaxDegreeOfParallelism = 20 }, id =>
+            {
+                try
+                {
+                    var humanUrl = wikiDataRequestor.GetEntityUrl(id);
+                    cache.FillCache(humanUrl);
+                    var c = Interlocked.Increment(ref count);
+                    if (c % 100 == 0)
+                    {
+                        Console.Write("\r{0}/{1} completed.", c, wdqResult.items.Count());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var t = new Tuple<int, Exception>(id, ex);
+                    errors.Add(t);
+                }
+            });
+            Console.WriteLine();
+            Console.WriteLine("{0} humans found.", count);
+            Console.WriteLine("Cache fill finished.");
         }
 
         [ClCommand("GetAllPersons")]
