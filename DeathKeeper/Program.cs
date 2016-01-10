@@ -137,12 +137,13 @@ namespace DeathKeeper
             {
                 try
                 {
-                    var human = humanFactory.FromEntityId(id);
-                    humans.Add(human);
                     if (humans.Count % 100 == 0)
                     {
                         Console.Write("\r{0}/{1} completed.", humans.Count, wdqResult.items.Count());
                     }
+                    var human = humanFactory.FromEntityId(id);
+                    humans.Add(human);
+
                 }
                 catch(Exception ex)
                 {
