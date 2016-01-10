@@ -1,4 +1,5 @@
-﻿using NodaTime.Text;
+﻿using NodaTime;
+using NodaTime.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,17 +37,18 @@ namespace DeathKeeper.WikiData.Human
             }
             else
             {
-                DateTime end;
+                Instant end;
                 if (DateOfDeath.HasValue)
                 {
-                    end = DateOfDeath.Value.ToDateTimeUtc();
-                        }
-                else {
-                    end = DateTime.Now;
-                    
+                    end = DateOfDeath.Value;
                 }
-                var age = end - DateOfBirth.Value.ToDateTimeUtc();
-                return (int)(age.TotalDays / 365.0);
+                else
+                {
+                    end = SystemClock.Instance.Now;
+                }
+                var age = end - DateOfBirth.Value;
+                var days = age.ToTimeSpan().TotalDays;
+                return (int)(days / 365.25);
             }
         }
 
@@ -61,7 +63,7 @@ namespace DeathKeeper.WikiData.Human
 
             sb.AppendFormat("{0}:", nameof(CountryOfCitizenshipIds));
             sb.AppendLine();
-            foreach(var countryOfCitizenshipId in CountryOfCitizenshipIds)
+            foreach (var countryOfCitizenshipId in CountryOfCitizenshipIds)
             {
                 sb.AppendFormat("\t{0}", countryOfCitizenshipId);
                 sb.AppendLine();
