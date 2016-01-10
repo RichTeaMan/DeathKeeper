@@ -137,7 +137,7 @@ namespace DeathKeeper
             {
                 try
                 {
-                    if (humans.Count % 100 == 0)
+                    if (humans.Count % 10 == 0)
                     {
                         Console.Write("\r{0}/{1} completed.", humans.Count, wdqResult.items.Count());
                     }
