@@ -41,6 +41,8 @@ namespace DeathKeeper.WikiData.Tests
             Assert.AreEqual(5, dodTime.ToDateTimeUtc().Month);
             Assert.AreEqual(11, dodTime.ToDateTimeUtc().Day);
 
+            Assert.AreEqual(49, human.Age());
+
             var expectedOccupation = new int[] {28389,
                 6625963,
                 4853732,
