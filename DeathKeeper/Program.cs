@@ -90,19 +90,19 @@ namespace DeathKeeper
             var wdqResult = wdqRequestor.ResultFromString(responseBody);
             Console.WriteLine("Found {0} human instances.", wdqResult.items.Length);
 
-            var wikiDataRequestor = new WikiDataRequestor();
-            var cache = new WebCache(wikiDataRequestor.GetCacheFolder());
+            var wikiDataRequestor = WikiDataRequestor.Create();
+
             int count = 0;
 
             var partitions = new List<IEnumerable<int>>();
 
-            
+
             Parallel.ForEach(wdqResult.items, new ParallelOptions() { MaxDegreeOfParallelism = 20 }, id =>
             {
                 try
                 {
                     var humanUrl = wikiDataRequestor.GetEntityUrl(id);
-                    cache.FillCache(humanUrl);
+                    wikiDataRequestor.WebCache.FillCache(humanUrl);
                     var c = Interlocked.Increment(ref count);
                     if (c % 100 == 0)
                     {
