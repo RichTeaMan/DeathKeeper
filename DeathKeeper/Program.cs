@@ -127,7 +127,7 @@ namespace DeathKeeper
             var errors = new List<Tuple<int, Exception>>();
             var responseBody = File.ReadAllText(WdqResponse);
             var wdqRequestor = new WdqRequestor();
-            
+
             Console.WriteLine("Getting human instance references.");
             var wdqResult = wdqRequestor.ResultFromString(responseBody);
             Console.WriteLine("Found {0} human instances.", wdqResult.items.Length);
@@ -145,7 +145,7 @@ namespace DeathKeeper
                     humans.Add(human);
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     var t = new Tuple<int, Exception>(id, ex);
                     errors.Add(t);
@@ -159,7 +159,7 @@ namespace DeathKeeper
             livingSb.AppendFormat("Name\tDoB\tAge\tLink");
             livingSb.AppendLine();
             var living = humans.Where(h => h.DateOfBirth != null && h.DateOfDeath == null).OrderByDescending(h => h.Age());
-            foreach(var l in living)
+            foreach (var l in living)
             {
                 livingSb.AppendFormat("{0}\t{1}\t{2}\t{3}", l.Label, l.DateOfBirth, l.Age(), l.WikiLink);
                 livingSb.AppendLine();
