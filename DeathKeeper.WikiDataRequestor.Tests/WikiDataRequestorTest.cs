@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 
 namespace DeathKeeper.WikiData.Tests
@@ -12,7 +11,7 @@ namespace DeathKeeper.WikiData.Tests
         [TestInitialize]
         public void Init()
         {
-            requestor = new WikiDataRequestor();
+            requestor = WikiDataRequestor.Create();
         }
 
         [TestMethod]

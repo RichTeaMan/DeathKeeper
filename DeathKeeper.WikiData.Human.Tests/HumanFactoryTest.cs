@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using DeathKeeper.WikiData.Human;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace DeathKeeper.WikiData.Tests
         public void Init()
         {
             humanFactory = new HumanFactory();
-            var requestor = new WikiDataRequestor();
+            var requestor = WikiDataRequestor.Create();
             string response = File.ReadAllText(TestFile);
             wikiDataResponse = requestor.ResultFromString(response);
         }
@@ -58,5 +57,6 @@ namespace DeathKeeper.WikiData.Tests
             Assert.AreEqual("https://en.wikipedia.org/wiki/Douglas_Adams", human.WikiLink);
 
         }
+
     }
 }

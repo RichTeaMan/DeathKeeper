@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeathKeeper.WikiData.Human
 {
@@ -12,7 +9,7 @@ namespace DeathKeeper.WikiData.Human
 
         public HumanFactory()
         {
-            WikiDataRequestor = new WikiDataRequestor();
+            WikiDataRequestor = WikiDataRequestor.Create();
         }
 
         private string GetClaimValue(Entity entity, string claim, string valueKey)
