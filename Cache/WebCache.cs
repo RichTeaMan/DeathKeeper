@@ -35,18 +35,29 @@ namespace Cache
 
             if (!File.Exists(cacheFilePath))
             {
-                await DownloadAndSave(url, cacheFilePath);
+                await DownloadAndSaveAsync(url, cacheFilePath);
             }
         }
 
         public string GetPage(string url)
         {
-            using (var task = Task.Run(async () => await GetPageAsync(url)))
+            if (!Directory.Exists(CacheFolder))
+                Directory.CreateDirectory(CacheFolder);
+            string cacheFilePath = GetCacheFilePath(url);
+
+            string contents;
+            if (File.Exists(cacheFilePath))
             {
-                task.Wait();
-                var page = task.Result;
-                return page;
+                using (var reader = File.OpenText(cacheFilePath))
+                {
+                    contents = reader.ReadToEnd();
+                }
             }
+            else
+            {
+                contents = DownloadAndSave(url, cacheFilePath);
+            }
+            return contents;
         }
 
         public async Task<string> GetPageAsync(string url)
@@ -65,12 +76,24 @@ namespace Cache
             }
             else
             {
-                contents = await DownloadAndSave(url, cacheFilePath);
+                contents = await DownloadAndSaveAsync(url, cacheFilePath);
             }
             return contents;
         }
 
-        private async Task<string> DownloadAndSave(string url, string cacheFilePath)
+        private string DownloadAndSave(string url, string cacheFilePath)
+        {
+            using (var client = new WebClient())
+            {
+                client.Headers.Add("User-Agent", UserAgent);
+                var uri = new Uri(url, UriKind.Absolute);
+                string contents = client.DownloadString(uri);
+                File.WriteAllText(cacheFilePath.ToLowerInvariant(), contents);
+                return contents;
+            }
+        }
+
+        private async Task<string> DownloadAndSaveAsync(string url, string cacheFilePath)
         {
             using (var client = new WebClient())
             {
@@ -84,7 +107,7 @@ namespace Cache
 
         private string GetCacheFilePath(string url)
         {
-            var name = url.Replace(":", "COlON").Replace("\"", "QUOT").Replace("/", "FSLASH").Replace("\\", "BSLASH").Replace("#", "HASH");
+            var name = url.Replace(":", "COLON").Replace("\"", "QUOT").Replace("/", "FSLASH").Replace("\\", "BSLASH").Replace("#", "HASH");
             var path = Path.Combine(CacheFolder, name);
             return path;
         }
